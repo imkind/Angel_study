@@ -1,6 +1,7 @@
 package com.chen.angel_study;
 
 import android.os.Bundle;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,7 +27,7 @@ public class plan extends AppCompatActivity {
         words.add(new word("9", "nine"));
 
 
-        ArrayAdapter itemsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, words);
+        WordAdpater itemsAdapter = new WordAdpater(this, 0, words);
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(itemsAdapter);
     }
