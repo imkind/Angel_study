@@ -28,13 +28,7 @@
             android:background="@android:color/holo_blue_dark"
             android:text="任务"/>
 
-        <TextView
-            android:id="@+id/textView_data"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_blue_dark"
-            android:text="日历"/>
+
 
         <TextView
             android:id="@+id/textView_photo"
@@ -42,7 +36,15 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:background="@android:color/holo_blue_dark"
-            android:text="笔记"/>
+            android:text="Photo"/>
+
+        <TextView
+            android:id="@+id/textView_data"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_dark"
+            android:text="日历"/>
 
 
 

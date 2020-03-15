@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         TextView plans = (TextView) findViewById(R.id.textView_plan);
 
         plans.setOnClickListener(new View.OnClickListener() {
@@ -25,5 +24,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(planIntent);
             }
         });
+
+        TextView photo = (TextView) findViewById(R.id.textView_photo);
+
+        photo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent photoIntent = new Intent(MainActivity.this, photo.class);
+                startActivity(photoIntent);
+            }
+        });
+
     }
 }
