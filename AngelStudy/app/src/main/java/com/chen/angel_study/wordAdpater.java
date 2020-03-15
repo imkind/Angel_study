@@ -12,9 +12,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-class wordAdpater extends ArrayAdapter<word>{
+class WordAdpater extends ArrayAdapter<word>{
 
-    public wordAdpater(Context context, int resource, ArrayList<word> words){
+    public WordAdpater(Context context, int resource, ArrayList<word> words){
         super(context,0,words);
     }
 

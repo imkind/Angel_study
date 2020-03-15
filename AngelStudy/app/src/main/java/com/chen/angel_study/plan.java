@@ -27,7 +27,7 @@ public class plan extends AppCompatActivity {
         words.add(new word("9", "nine"));
 
 
-        wordAdpater itemsAdapter = new wordAdpater(this, 0, words);
+        WordAdpater itemsAdapter = new WordAdpater(this, 0, words);
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(itemsAdapter);
     }
