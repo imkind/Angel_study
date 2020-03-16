@@ -1,5 +1,6 @@
 package com.chen.angel_study;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 class wordAdpater extends ArrayAdapter<word>{
 
-    public wordAdpater(Context context, int resource, ArrayList<word> words){
+    public wordAdpater(Activity context, int resource, ArrayList<word> words){
         super(context,0,words);
     }
 

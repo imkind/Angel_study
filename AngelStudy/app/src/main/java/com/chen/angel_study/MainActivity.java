@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,9 +40,20 @@ public class MainActivity extends AppCompatActivity {
         setfragment = new setFragment();
 
         initFragment();
-//        fragments = new Fragment[]{planfragment, photofragment, setfragment};
-//        getSupportFragmentManager().beginTransaction().replace(R.id.main_view,planfragment).show(planfragment).commit();
-//        initFragment()；
+
+//        ImageButton numbers = (ImageButton) findViewById(R.id.bottom1);
+//
+//        numbers.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
+//                startActivity(numbersIntent);
+//            }
+//        });
+
+
 
     }
 
@@ -71,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             if (lastfragment != 0) {
                                 switchFragment(lastfragment, 0);
                                 lastfragment = 0;
+
                             }
                             return true;
                         }
