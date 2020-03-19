@@ -1,13 +1,26 @@
 package com.chen.angel_study;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -39,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
         photofragment = new photoFragment();
         setfragment = new setFragment();
 
+
         initFragment();
+        intputt();
 
 //        ImageButton numbers = (ImageButton) findViewById(R.id.bottom1);
 //
@@ -115,6 +130,54 @@ public class MainActivity extends AppCompatActivity {
             transaction.add(R.id.main_view, fragments[de]);
         }
         transaction.show(fragments[de]).commitAllowingStateLoss();
+    }
+
+
+    private void intputt(){
+
+        final Context mContext = this;
+
+
+       ImageButton button  = (ImageButton) findViewById(R.id.bottom1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = getLayoutInflater().inflate(R.layout.wenben,null);
+                final EditText userInput = (EditText) view.findViewById(R.id.shuru);
+                Button button2 = (Button) view.findViewById(R.id.ok);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+                alertDialogBuilder.setView(view);
+
+                alertDialogBuilder.setCancelable(true).setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+
+                                String p= userInput.getText().toString();
+                                item wordlist = (item)getApplication();
+
+                                wordlist.setword(p,"0");
+
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+//                button2.setOnClickListener(new View.OnClickListener(){
+//                    public void onClick(View v) {
+//
+//                        item words = (item)getApplicationContext();
+//                        words.inwords( userInput.getText().toString(),"0");
+//
+//                    }
+//                });
+
+            }
+        });
+
+
+
     }
 
 }

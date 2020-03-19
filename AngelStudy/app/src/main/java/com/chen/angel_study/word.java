@@ -1,8 +1,8 @@
 package com.chen.angel_study;
 
 public class word {
-    private String numbers;
-    private String english;
+    private  String numbers;
+    private  String english;
 
     public word(String Anumbers, String Aenglish){
         numbers = Anumbers;
