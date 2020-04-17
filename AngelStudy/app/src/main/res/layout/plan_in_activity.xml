@@ -1,60 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
     <include layout="@layout/action_bar_layout"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/action_bar">
-    </include>
+        android:layout_width="match_parent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rl_content"
-        android:layout_below="@id/action_bar">
+        android:id="@+id/all_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/ll_update_time"
+            android:id="@+id/layout_update_time"
             android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="时间"
+                android:text="@string/last_update_text"
                 android:textSize="16sp"
-                android:textColor="#b7b6b6"/>
+                android:textColor="@color/gray2"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="2020-01-11 23:27"
+                android:text="2017年04月20日 12：45"
                 android:gravity="center"
-                android:textColor="#b7b6b6"
-                android:id="@+id/tv_last_edit_time"/>
+                android:textColor="@color/gray2"
+                android:id="@+id/last_edit_time"/>
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_update_time"
-            android:layout_above="@id/rl_footer"
+            android:layout_below="@id/layout_update_time"
+            android:layout_above="@id/layout_footer"
             android:padding="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/ll_event">
+                android:id="@+id/layout_event">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
-                    android:text="事件"
+                    android:text="计划事件"
                     android:id="@+id/tv_event_text"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ed_title"
+                    android:id="@+id/Plan_title"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textSize="17sp" />
@@ -64,48 +63,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@id/ll_event"
+                android:layout_below="@id/layout_event"
                 android:layout_marginTop="5dp"
-                android:id="@+id/ll_remind_time">
+                android:id="@+id/layout_remind_time">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_remind_time_text"
-                    android:text="提醒时间"
+                    android:text="提醒时间："
                     android:textSize="17sp"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
-                    android:text="2020-01-11 23:27"
-                    android:id="@+id/tv_remind_time_picker"/>
+                    android:text="2020-04-08 20:20"
+                    android:id="@+id/remind_time_picker"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/ll_remind_time"
+                android:layout_below="@+id/layout_remind_time"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="描述："
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="重要？"
+                        android:text="@string/is_important_event"
                         android:textSize="17sp"
                         android:layout_marginStart="100dp"/>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/chb_is_important"/>
+                        android:id="@+id/is_important"/>
                 </LinearLayout>
                 <ScrollView
                     android:layout_width="match_parent"
@@ -116,8 +111,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/ed_content"
-                        android:background="#00FFFFFF"/>
+                        android:id="@+id/Plan_content"
+                        android:background="@color/transparent"/>
                 </ScrollView>
             </LinearLayout>
 
@@ -126,7 +121,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_footer"
+            android:id="@+id/layout_footer"
             android:layout_alignParentBottom="true"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -135,16 +130,16 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/ic_delete_event"
+                android:src="@drawable/trash1"
                 android:layout_alignParentStart="true"
-                android:id="@+id/iv_delete"
+                android:id="@+id/delete"
                 />
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_edit2"
-                android:id="@+id/iv_edit"/>
+                android:src="@drawable/edit"
+                android:id="@+id/edit"/>
         </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

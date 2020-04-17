@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.chen.angel_study">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
     <application
+        android:name="com.chen.angel_study.Appication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/angel"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/angel"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".photo"></activity>
-        <activity android:name=".plan" />
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name="com.chen.angel_study.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider
-            android:name=".data.PlanProvider"
-            android:authorities="com.chen.android.plan"
-            android:exported="false"/>
+
+        <activity
+            android:name="com.chen.angel_study.Activitys.PlanDetailActivity"
+            android:theme="@style/NoActionBarTheme" />
+
+        <activity
+            android:name="com.chen.angel_study.Activitys.ClockActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/FullScreen" />
+
+        <receiver android:name="com.chen.angel_study.receive.ClockReceive">
+            <intent-filter android:priority="100">
+                <action android:name="com.liuzhengwei.memo.action.CLOCK_RECEIVER" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.chen.angel_study.service.ClockService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

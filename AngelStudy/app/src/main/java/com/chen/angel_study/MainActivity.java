@@ -1,180 +1,125 @@
 package com.chen.angel_study;
 
-<<<<<<< Updated upstream
+
 import android.content.Intent;
-=======
-import android.app.Dialog;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
->>>>>>> Stashed changes
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< Updated upstream
 
-public class MainActivity extends AppCompatActivity {
+
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.chen.angel_study.Activitys.BaseActivity;
+import com.chen.angel_study.Activitys.PlanDetailActivity;
+import com.chen.angel_study.Activitys.RecyclerViewAdapter;
+import com.chen.angel_study.Listen.MyItemTouchHelperCallback;
+import com.chen.angel_study.Manager.ClockManager;
+import com.chen.angel_study.Manager.PlanManager;
+
+import com.chen.angel_study.util.Toasts;
+
+
+
+
+import butterknife.BindView;
+
+public class MainActivity extends BaseActivity  {
+
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
+    private RecyclerViewAdapter mAdapter;
+    private PlanManager mPlanManger = PlanManager.getInstance();
+    private ClockManager mClockManager = ClockManager.getInstance();
 
     @Override
-=======
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import com.chen.angel_study.data.PlanContract;
-import com.chen.angel_study.data.PlanContract.PlanEntry;
-import com.chen.angel_study.data.PlanDpHelper;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-public class MainActivity extends AppCompatActivity {
-
-    private planFragment planfragment;
-    private photoFragment photofragment;
-    private setFragment setfragment;
-
-    int lastfragment = 0;
-    private Fragment[] fragments;
-    private int lastFragment;
-
-    private FragmentTransaction transaction;
-    private FragmentManager fragmentManager;
-    private BottomNavigationView bottomNavigationView;
-
-    private PlanDpHelper mDbHelper;
-
->>>>>>> Stashed changes
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-<<<<<<< Updated upstream
-=======
-        planfragment = new planFragment();
-        photofragment = new photoFragment();
-        setfragment = new setFragment();
-
-        mDbHelper = new PlanDpHelper(this);
-
-
-        initFragment();
-//        intputt();
-
-
     }
 
-    private void initFragment() {
-
-        planfragment = new planFragment();
-        photofragment = new photoFragment();
-        setfragment = new setFragment();
-        fragments = new Fragment[]{planfragment, photofragment, setfragment};
-        lastfragment = 0;
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_view, planfragment).show(planfragment).commit();
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navi_view);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(changeFragment);
+    @Override
+    protected void initView() {
+        mAdapter = new RecyclerViewAdapter(this);
     }
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener changeFragment =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
-                    fragmentManager = getSupportFragmentManager();
-                    transaction = fragmentManager.beginTransaction();
-                    switch (item.getItemId()) {
-                        case R.id.id1: {
-                            if (lastfragment != 0) {
-                                switchFragment(lastfragment, 0);
-                                lastfragment = 0;
->>>>>>> Stashed changes
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
-        TextView plans = (TextView) findViewById(R.id.textView_plan);
+    @Override
+    protected void initData() {
+        //设置数据源，适配器
+        mAdapter.setDatabases(mPlanManger.findAll());
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        //滑动删除
+        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(new MyItemTouchHelperCallback(mAdapter));
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+    }
 
-        plans.setOnClickListener(new View.OnClickListener() {
+    @Override
+    protected void setListener() {
+        mAdapter.setOnItemClickListener(mOnItemClickListener);
+    }
 
-<<<<<<< Updated upstream
-            @Override
-            public void onClick(View view) {
-                Intent planIntent = new Intent(MainActivity.this, plan.class);
-                startActivity(planIntent);
-            }
-        });
-=======
-    private void switchFragment(int lastfragment, int de) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+        return true;
+    }
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.hide(fragments[lastfragment]);
-        if (fragments[de].isAdded() == false) {
-            transaction.add(R.id.main_view, fragments[de]);
+    //菜单添加新的计划
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_add) {
+            Intent intent = new Intent();
+            intent.setClass(this, PlanDetailActivity.class);
+            intent.putExtra(PlanDetailActivity.EXTRA_ADD_EVENT, true);
+            startActivity(intent);
         }
-        transaction.show(fragments[de]).commitAllowingStateLoss();
+        return super.onOptionsItemSelected(item);
     }
 
-
-    private void intputt(){
-
-        final Context mContext = this;
-
-       ImageButton button  = (ImageButton) findViewById(R.id.bottom1);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View view = getLayoutInflater().inflate(R.layout.wenben,null);
-                final EditText userInput = (EditText) view.findViewById(R.id.shuru);
-                Button button2 = (Button) view.findViewById(R.id.ok);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-                alertDialogBuilder.setView(view);
-
-                alertDialogBuilder.setCancelable(true).setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-
-                                String planString= userInput.getText().toString();
-                                SQLiteDatabase db = mDbHelper.getWritableDatabase();
-                                ContentValues values = new ContentValues();
-                                values.put(PlanEntry.COLUMN_NAME_PLAN,planString);
-                                values.put(PlanEntry.COLUMN_NAME_TIME,"wewr");
-                                Uri newUri = getContentResolver().insert(PlanEntry.CONTENT_URI, values);
-                                if (newUri == null) {
-                                    Log.v("显示","ID");
-                                } else {
-                                    Log.v("显示","ID11");
-                                }
-
-//                                item wordlist = (item)getApplication();
-//                                wordlist.setword(p,"0");
-
-
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-
-//                button2.setOnClickListener(new View.OnClickListener(){
-//                    public void onClick(View v) {
-//
-//                        item words = (item)getApplicationContext();
-//                        words.inwords( userInput.getText().toString(),"0");
-//
-//                    }
-//                });
-
-            }
-        });
-
->>>>>>> Stashed changes
+    @Override
+    public int getContentView() {
+        return R.layout.activity_main;
     }
+
+    private RecyclerViewAdapter.OnItemClickListener mOnItemClickListener = new RecyclerViewAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, PlanDetailActivity.class);
+                intent.putExtra(PlanDetailActivity.EXTRA_EDIT_EVENT, false);
+                intent.putExtra(PlanDetailActivity.EXTRA_PLAN_DATA, mAdapter.getDatabases().get(position));
+                startActivity(intent);
+        }
+
+        @Override
+        public void onItemLongClick(View view, int position) {
+            Toasts.showToast("Long clicked");
+        }
+    };
+
+   //数据更新,singleTask模式
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        mAdapter.setDatabases(mPlanManger.getPlans());
+    }
+
 }
