@@ -5,7 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
 
-
+    <color name="backg">#f0f2f4</color>
     <color name="gray">#DCDCDC</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00FFFFFF</color>

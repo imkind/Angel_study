@@ -8,7 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,63 +21,45 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chen.angel_study.Activitys.BaseActivity;
 import com.chen.angel_study.Activitys.PlanDetailActivity;
 import com.chen.angel_study.Activitys.RecyclerViewAdapter;
-import com.chen.angel_study.Listen.MyItemTouchHelperCallback;
-import com.chen.angel_study.Manager.ClockManager;
+import com.chen.angel_study.Activitys.photoFragment;
+import com.chen.angel_study.Activitys.planFragment;
+import com.chen.angel_study.Activitys.setFragment;
 import com.chen.angel_study.Manager.PlanManager;
-
-import com.chen.angel_study.util.Toasts;
-
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 
-import butterknife.BindView;
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends BaseActivity  {
+    private planFragment planfragment;
+    private photoFragment photofragment;
+    private setFragment setfragment;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+    int lastfragment = 0;
+    private Fragment[] fragments;
+    private int lastFragment;
+
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
+    private BottomNavigationView bottomNavigationView;
+
+
 
     private RecyclerViewAdapter mAdapter;
     private PlanManager mPlanManger = PlanManager.getInstance();
-    private ClockManager mClockManager = ClockManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+
+        planfragment = new planFragment();
+        photofragment = new photoFragment();
+        setfragment = new setFragment();
+
+        initFragment();
     }
 
-    @Override
-    protected void initView() {
-        mAdapter = new RecyclerViewAdapter(this);
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void initData() {
-        //设置数据源，适配器
-        mAdapter.setDatabases(mPlanManger.findAll());
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        //滑动删除
-        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(new MyItemTouchHelperCallback(mAdapter));
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
-
-    @Override
-    protected void setListener() {
-        mAdapter.setOnItemClickListener(mOnItemClickListener);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,7 +67,6 @@ public class MainActivity extends BaseActivity  {
         return true;
     }
 
-    //菜单添加新的计划
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_add) {
@@ -93,33 +78,70 @@ public class MainActivity extends BaseActivity  {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public int getContentView() {
-        return R.layout.activity_main;
+     private void initFragment() {
+
+        planfragment = new planFragment();
+        photofragment = new photoFragment();
+        setfragment = new setFragment();
+        fragments = new Fragment[]{planfragment, photofragment, setfragment};
+        lastfragment = 0;
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_view, planfragment).show(planfragment).commit();
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navi_view);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(changeFragment);
+
     }
 
-    private RecyclerViewAdapter.OnItemClickListener mOnItemClickListener = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(View view, int position) {
+    private BottomNavigationView.OnNavigationItemSelectedListener changeFragment =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, PlanDetailActivity.class);
-                intent.putExtra(PlanDetailActivity.EXTRA_EDIT_EVENT, false);
-                intent.putExtra(PlanDetailActivity.EXTRA_PLAN_DATA, mAdapter.getDatabases().get(position));
-                startActivity(intent);
+                    fragmentManager = getSupportFragmentManager();
+                    transaction = fragmentManager.beginTransaction();
+                    switch (item.getItemId()) {
+                        case R.id.id1: {
+                            if (lastfragment != 0) {
+                                switchFragment(lastfragment, 0);
+                                lastfragment = 0;
+
+                            }
+                            return true;
+                        }
+                        case R.id.id2: {
+                            if (lastfragment != 1) {
+                                switchFragment(lastfragment, 1);
+                                lastfragment = 1;
+                            }
+                            return true;
+                        }
+                        case R.id.id3: {
+                            if (lastfragment != 2) {
+                                switchFragment(lastfragment, 2);
+                                lastfragment = 2;
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            };
+
+
+    private void switchFragment(int lastfragment, int de) {
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(fragments[lastfragment]);
+        if (fragments[de].isAdded() == false) {
+            transaction.add(R.id.main_view, fragments[de]);
         }
+        transaction.show(fragments[de]).commitAllowingStateLoss();
+    }
 
-        @Override
-        public void onItemLongClick(View view, int position) {
-            Toasts.showToast("Long clicked");
-        }
-    };
-
-   //数据更新,singleTask模式
-    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         mAdapter.setDatabases(mPlanManger.getPlans());
     }
 
 }
+
