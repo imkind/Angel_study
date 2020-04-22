@@ -2,17 +2,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+  >
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navi_view"
+        android:layout_alignParentTop="true">
 
     <LinearLayout
         android:id="@+id/main_view"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/bottom_navi_view"
-        android:background="@color/backg"/>
+        android:background="@null"
+        android:orientation="vertical" />
 
+        <com.ddz.floatingactionbutton.FloatingActionMenu
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            app:fab_addButtonColorNormal="@color/colorPrimary"
+            fab_addButtonColorPressed="@color/colorPrimaryDark">
+
+            <com.ddz.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_colorPressed="@color/click"
+                app:fab_icon="@drawable/bsound"
+                app:fab_size="mini" />
+
+            <com.ddz.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_colorPressed="@color/click"
+                app:fab_icon="@drawable/bedite2"
+                app:fab_size="mini" />
+        </com.ddz.floatingactionbutton.FloatingActionMenu>
+
+        <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/add3"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:layout_gravity="right|bottom"/>-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navi_view"
@@ -21,5 +61,6 @@
         android:layout_alignParentBottom="true"
         app:itemBackground="@android:color/white"
         app:menu="@menu/button_menu" />
+
 
 </RelativeLayout>

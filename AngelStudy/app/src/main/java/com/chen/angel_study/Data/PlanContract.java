@@ -22,6 +22,7 @@ public final class PlanContract {
         public static final String COLUMN_NAME_TIMEREMIND = "remind_time";
         public static final String COLUMN_NAME_IMPORTANT = "important";
         public static final String COLUMN_NAME_CLOCK = "is_clocked";
+        public static final String COLUMN_NAME_CHECK = "chose";
 
 
         public static final int THINGS_OPEN= 1;

@@ -24,7 +24,7 @@ public class PlanShow {
     }
 
     public List<Plan> findAll() {
-        String sql = "SELECT * FROM " + PlanEntry.TABLE_NAME + " ORDER BY " + PlanEntry.COLUMN_NAME_IMPORTANT + " DESC, " + PlanEntry.COLUMN_NAME_TIMECREAT + " DESC";
+        String sql = "SELECT * FROM " + PlanEntry.TABLE_NAME + " ORDER BY " + PlanEntry.COLUMN_NAME_IMPORTANT + " DESC, " + PlanEntry.COLUMN_NAME_CHECK + " ASC, " + PlanEntry._ID + " DESC";
         return mTemplate.query(sql, mCallback);
     }
 
@@ -53,6 +53,7 @@ public class PlanShow {
     public int getLatestPlanId() {
         return mTemplate.getLatestId(PlanEntry.TABLE_NAME);
     }
+
 //ContentValues进行sql的存储
     private ContentValues GetValues(Plan event, boolean isUpdate) {
         ContentValues contentValues = new ContentValues();
@@ -67,6 +68,7 @@ public class PlanShow {
         contentValues.put(PlanEntry.COLUMN_NAME_TIMEUPDATE, DateUtil.dateToStr(new Date()));
         contentValues.put(PlanEntry.COLUMN_NAME_TIMEREMIND, event.getmRemindTime());
         contentValues.put(PlanEntry.COLUMN_NAME_IMPORTANT, event.getmIsImportant());
+        contentValues.put(PlanEntry.COLUMN_NAME_CHECK, event.getmChose());
         return contentValues;
     }
 

@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -25,8 +29,13 @@ import com.chen.angel_study.Activitys.photoFragment;
 import com.chen.angel_study.Activitys.planFragment;
 import com.chen.angel_study.Activitys.setFragment;
 import com.chen.angel_study.Manager.PlanManager;
+import com.ddz.floatingactionbutton.FloatingActionButton;
+import com.ddz.floatingactionbutton.FloatingActionMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,23 +52,40 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private BottomNavigationView bottomNavigationView;
 
-
-
     private RecyclerViewAdapter mAdapter;
     private PlanManager mPlanManger = PlanManager.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+
+
         planfragment = new planFragment();
         photofragment = new photoFragment();
         setfragment = new setFragment();
 
         initFragment();
+        FabClick();
     }
+    public void FabClick() {
 
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab1);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, PlanDetailActivity.class);
+                intent.putExtra(PlanDetailActivity.EXTRA_ADD_EVENT, true);
+                startActivity(intent);
+
+            }
+        });
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         }
         transaction.show(fragments[de]).commitAllowingStateLoss();
     }
+
 
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

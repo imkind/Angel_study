@@ -28,6 +28,14 @@ public class Plan implements BaseColumns, Parcelable {
     private Integer mIsClocked = 0;
     private String mRemindTime;
     private Integer mIsImportant;
+    private Integer mChose = 0;
+
+    public Integer getmChose(){
+        return mChose;
+    }
+    public void setmChose(Integer mChose){
+        this.mChose = mChose;
+    }
 
     public Integer getmIsImportant() {
         return mIsImportant;
@@ -113,6 +121,11 @@ public class Plan implements BaseColumns, Parcelable {
             mIsImportant = in.readInt();
         }
         mRemindTime = in.readString();
+        if (in.readByte() == 0) {
+            mChose = null;
+        } else {
+            mChose = in.readInt();
+        }
     }
     //写入值
     @Override
@@ -141,6 +154,12 @@ public class Plan implements BaseColumns, Parcelable {
             dest.writeInt(mIsImportant);
         }
         dest.writeString(mRemindTime);
+        if (mChose == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(mChose);
+        }
     }
     //读出值
     public static final Creator<Plan> CREATOR = new Creator<Plan>() {

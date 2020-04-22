@@ -18,6 +18,7 @@ public class PlanCallback implements PlanCallbackk<Plan> {
         plan.setmRemindTime(cursor.getString(cursor.getColumnIndexOrThrow(PlanEntry.COLUMN_NAME_TIMEREMIND)));
         plan.setmIsImportant(cursor.getInt(cursor.getColumnIndexOrThrow(PlanEntry.COLUMN_NAME_IMPORTANT)));
         plan.setmIsClocked(cursor.getInt(cursor.getColumnIndexOrThrow(PlanEntry.COLUMN_NAME_CLOCK)));
+        plan.setmChose(cursor.getInt(cursor.getColumnIndexOrThrow(PlanEntry.COLUMN_NAME_CHECK)));
         return  plan;
     }
 }

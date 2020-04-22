@@ -21,5 +21,11 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+    <style name="labels_style">
+        <item name="android:textColor">@color/gray2</item>
+    </style>
+
+
+
 
 </resources>

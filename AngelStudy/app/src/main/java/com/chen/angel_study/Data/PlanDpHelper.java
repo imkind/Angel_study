@@ -20,7 +20,8 @@ public class PlanDpHelper extends SQLiteOpenHelper {
                     + PlanEntry.COLUMN_NAME_TIMEUPDATE + " datetime, "
                     + PlanEntry.COLUMN_NAME_TIMEREMIND + " datetime, "
                     + PlanEntry.COLUMN_NAME_IMPORTANT + " INTEGER, "
-                    + PlanEntry.COLUMN_NAME_CLOCK + " INTEGER"
+                    + PlanEntry.COLUMN_NAME_CLOCK + " INTEGER, "
+                    + PlanEntry.COLUMN_NAME_CHECK + " INTEGER"
                     + ")";
 
     public PlanDpHelper (){
@@ -31,14 +32,14 @@ public class PlanDpHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_ENTRIES);
 
-        String sql = "INSERT INTO " + PlanEntry.TABLE_NAME + " VALUES(NULL, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO " + PlanEntry.TABLE_NAME + " VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
         db.beginTransaction();
         db.execSQL(sql, new Object[]{"简单的示例",
                 "简易的记事本app",
                 "2020-4-4 17:28:23",
                 "2020-4-4 17:28",
                 "2020-4-4 17:28",
-                0, 0}
+                0, 0, 0}
                 );
         db.setTransactionSuccessful();
         db.endTransaction();

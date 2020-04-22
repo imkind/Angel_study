@@ -234,7 +234,9 @@ public class PlanDetailActivity extends BaseActivity {
                     plan.setmId(mPlanManager.getLatestPlanId());
                 }
                 //添加闹钟
-                mClockManager.addAlarm(buildIntent(plan.getmId()), DateUtil.str2Date(plan.getmRemindTime()));//日期转化
+                if(plan.getmIsClocked() == 0) {
+                    mClockManager.addAlarm(buildIntent(plan.getmId()), DateUtil.str2Date(plan.getmRemindTime()));//日期转化
+                }
                 mPlanManager.SetData();
                 //返回主界面
                 Intent intent = new Intent();
@@ -283,6 +285,7 @@ public class PlanDetailActivity extends BaseActivity {
         plan.setmTitle(PlanTitle.getText().toString());
         plan.setmIsImportant(IsImportant.isChecked() ? Constants.PlanFlag.IMPORTANT : Constants.PlanFlag.NORMAL);
         plan.setmContent(PlanContent.getText().toString());
+        plan.setmChose(Constants.PlanFlag.NORMAL);
         plan.setmUpdatedTime(DateUtil.dateToStr(new Date()));
         return plan;
     }
@@ -292,6 +295,6 @@ public class PlanDetailActivity extends BaseActivity {
         editText.setFocusable(!readOnly);
         editText.setFocusableInTouchMode(!readOnly);
         editText.setCursorVisible(!readOnly);
-        editText.setTextColor(ContextCompat.getColor(this,readOnly ? R.color.gray2: R.color.black));
+        editText.setTextColor(ContextCompat.getColor(this,readOnly ? R.color.blue1: R.color.blue1));
     }
 }

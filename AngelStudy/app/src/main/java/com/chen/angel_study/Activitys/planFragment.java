@@ -48,12 +48,12 @@ public class planFragment extends Fragment {
 
         mAdapter = new RecyclerViewAdapter(getActivity());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-
         mAdapter.setDatabases(mPlanManger.findAll());
-        mRecyclerView.setAdapter(mAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(new MyItemTouchHelperCallback(mAdapter));
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
         setListener();
+
+        mRecyclerView.setAdapter(mAdapter);
         return rootView;
     }
 
@@ -72,6 +72,8 @@ public class planFragment extends Fragment {
             intent.putExtra(PlanDetailActivity.EXTRA_PLAN_DATA, mAdapter.getDatabases().get(position));
             startActivity(intent);
         }
+
+
 
         @Override
         public void onItemLongClick(View view, int position) {

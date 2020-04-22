@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class ClockManager {
     private static ClockManager instance = new ClockManager();
-
+    private PlanManager mEventManager = PlanManager.getInstance();
     private ClockManager() {
     }
 
@@ -19,18 +19,18 @@ public class ClockManager {
     }
 
      //获取系统闹钟服务
-    private static AlarmManager getAlarmManager() {
+    private static AlarmManager MyAlarmManager() {
         return (AlarmManager) Appication.getContext().getSystemService(Context.ALARM_SERVICE);
     }
 
      //取消闹钟
     public void cancelAlarm(PendingIntent pendingIntent) {
-        getAlarmManager().cancel(pendingIntent);
+        MyAlarmManager().cancel(pendingIntent);
     }
 
      //添加闹钟
     public void addAlarm(PendingIntent pendingIntent, Date performTime) {
         cancelAlarm(pendingIntent);
-        getAlarmManager().set(AlarmManager.RTC_WAKEUP, performTime.getTime(), pendingIntent);
+        MyAlarmManager().set(AlarmManager.RTC_WAKEUP, performTime.getTime(), pendingIntent);
     }
 }
