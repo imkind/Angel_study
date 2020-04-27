@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">Angel-Study</string>
+    <string name="app_name2">AngelPlan</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="remind_time_text">提醒时间：</string>
+    <string name="last_update_text">上次编辑：</string>
+    <string name="please_choose_date">请选择日期：</string>
+    <string name="please_choose_time">请选择时间：</string>
+    <string name="enter_edit_mode">您已进入编辑模式。</string>
+    <string name="update_successful">更新成功。</string>
+    <string name="update_failed">更新失败。</string>
+    <string name="create_successful">添加成功。</string>
+    <string name="create_failed">添加失败。</string>
+    <string name="is_important_event">是否为重要事件：</string>
+    <string name="clock_event_msg_template">您有事件：%1$s，请记得去完成！</string>
+
 </resources>

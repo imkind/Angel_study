@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':ocr_ui'
 rootProject.name='Angel-Study'

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <include layout="@layout/action_bar_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/all_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/layout_update_time">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="上次编辑时间："
+                android:textColor="@color/gray2"
+                android:textSize="16sp"
+                android:layout_marginStart="60dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="2020年04月20日 12：45"
+                android:gravity="center"
+                android:textColor="@color/gray2"
+                android:id="@+id/last_edit_time"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_update_time"
+            android:layout_above="@id/layout_footer"
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/layout_event">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="计划："
+                    android:textColor="@color/gray3"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:id="@+id/Plan_title"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:background="@null"
+                    android:textCursorDrawable="@drawable/edit_style"
+                    android:hint="你的计划？"
+                    android:textColorHint="@color/gray1"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/layout_event"
+                android:layout_marginTop="10dp"
+                android:id="@+id/layout_remind_time">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_remind_time_text"
+                    android:text="提醒时间："
+                    android:textSize="17sp"/>
+
+                <EditText
+                    android:id="@+id/remind_time_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2020-04-08 20:20"
+                    android:textColor="@color/gray2"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_remind_time"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/is_important"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                         />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="重要"
+                        android:textColor="@color/gray3"
+                        android:textSize="17sp"
+                        />
+
+                </LinearLayout>
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/scroll_view_border"
+                    android:id="@+id/scroll_view"
+                    android:padding="8dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textCursorDrawable="@drawable/edit_style"
+                        android:hint="计划描述:"
+                        android:textColorHint="@color/gray1"
+                        android:id="@+id/Plan_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:background="@color/transparent"/>
+                </ScrollView>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_footer"
+            android:layout_alignParentBottom="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="1dp">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/btrash"
+                android:layout_alignParentStart="true"
+                android:id="@+id/delete"
+                />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/bedite"
+                android:id="@+id/edit"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
